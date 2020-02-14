@@ -1,18 +1,19 @@
 ## Import libraries
+import re
 import requests
 from bs4 import BeautifulSoup
-import re
+from typing import Dict
 
 ## Item Class
-class Item():
+class Item:
 
-    def __init__(self):
-        self.url = 'https://www.johnlewis.com/john-lewis-partners-hemingway-3-door-sideboard/p230727606'
-        self.tag_name = 'p'
-        self.query = {"class": "price price--large"}
+    def __init__(self, url: str, tag_name: str, query: Dict): ## Type hinting
+        self.url = url
+        self.tag_name = tag_name
+        self.query = query
         self.price = None
 
-    def load_price(self):
+    def load_price(self) -> float: ## Type hinting on what will be returned
         response = requests.get(self.url)
         content = response.content
         soup = BeautifulSoup(content, 'html.parser')
