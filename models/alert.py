@@ -3,9 +3,10 @@ import uuid
 from typing import Dict, List
 from models.item import Item
 from common.database import Database
+from models.model import Model
 
-## Alert Class
-class Alert:
+## Alert Class - Instantiation of Model class
+class Alert(Model):
 
     def __init__(self, item_id: str, price_limit: float, _id: str = None):
         self.item_id = item_id

@@ -1,13 +1,12 @@
 ## Import libraries
-import re
-import uuid
-import requests
+import re, uuid, requests
 from bs4 import BeautifulSoup
 from typing import Dict, List
 from common.database import Database
+from models.model import Model
 
-## Item Class
-class Item:
+## Item Class - Instantiation of Model Class
+class Item(Model):
 
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None): ## Type hinting
         self.url = url
