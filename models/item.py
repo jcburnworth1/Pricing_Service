@@ -7,13 +7,15 @@ from models.model import Model
 
 ## Item Class - Instantiation of Model Class
 class Item(Model):
+    collection = 'items'
 
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None): ## Type hinting
+        super().__init__()
         self.url = url
         self.tag_name = tag_name
         self.query = query
         self.price = None
-        self.collection = 'items'
+
         self._id = _id or uuid.uuid4().hex ## Will overwrite the mongo db default id
 
     def __repr__(self): ## Return an string representation of the item object
@@ -56,10 +58,3 @@ class Item(Model):
         item_json = Database.find_one("items", {"_id": _id})
 
         return cls(**item_json)
-
-    @classmethod
-    def all(cls) -> List:
-        """Return all items from items collection"""
-        items_from_db = Database.find('items', {})  ## cursor
-
-        return [cls(**item) for item in items_from_db]
