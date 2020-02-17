@@ -6,14 +6,14 @@ import json
 ## Create item Blueprint
 item_blueprint = Blueprint('items', __name__)
 
-## Item Index Endpoint
+## Item Endpoint
 @item_blueprint.route('/')
 def index(): ## By default will show a list of all items stored in mongo
     items = Item.all()
 
     return render_template('items/index.html', items=items)
 
-## Items Endpoint
+## New Items Endpoint
 @item_blueprint.route('/new', methods=['GET', 'POST'])
 def new_item():
 
