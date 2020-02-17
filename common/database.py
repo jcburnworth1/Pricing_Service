@@ -22,3 +22,13 @@ class Database(object):
     def find_one(collection: str, query: Dict) -> Dict:
         """Retrieve first document in the query result"""
         return Database.DATABASE[collection].find_one(query)
+
+    @staticmethod
+    def update(collection: str, query: Dict, data: Dict) -> None:
+        """Upsert mongo data"""
+        Database.DATABASE[collection].update(query, data, upsert=True)
+
+    @staticmethod
+    def remove(collection: str, query: Dict) -> Dict:
+        """Remove selected ata from supplied mongo collection"""
+        return Database.DATABASE[collection].remove(query)

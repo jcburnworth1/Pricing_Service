@@ -1,8 +1,7 @@
 ## Import libraries
 import re, uuid, requests
 from bs4 import BeautifulSoup
-from typing import Dict, List
-from common.database import Database
+from typing import Dict
 from models.model import Model
 
 ## Item Class - Instantiation of Model Class
@@ -46,15 +45,3 @@ class Item(Model):
             'tag_name': self.tag_name,
             'query': self.query
         }
-
-    def save_to_mongo(self):
-        """Save blog details to mongo items collection"""
-        Database.insert(self.collection, self.json())
-
-    @classmethod
-    def get_by_id(cls, _id):
-        """Retrieve our data from mongo based on item id"""
-
-        item_json = Database.find_one("items", {"_id": _id})
-
-        return cls(**item_json)

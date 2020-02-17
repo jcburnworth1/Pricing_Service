@@ -1,8 +1,7 @@
 ## Import libraries
 import uuid
-from typing import Dict, List
+from typing import Dict
 from models.item import Item
-from common.database import Database
 from models.model import Model
 
 ## Alert Class - Instantiation of Model class
@@ -23,10 +22,6 @@ class Alert(Model):
             "price_limit": self.price_limit,
             "item_id": self.item_id
         }
-
-    def save_to_mongo(self):
-        """Save new user to mongo alerts collection"""
-        Database.insert(self.collection, self.json())
 
     def load_item_price(self) -> float:
         """Reach out to specific url and get new price"""

@@ -1,3 +1,4 @@
+########## Set the blueprint for our application ##########
 ## Import libraries
 from flask import Blueprint
 
