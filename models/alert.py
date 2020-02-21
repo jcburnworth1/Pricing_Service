@@ -16,7 +16,7 @@ class Alert(Model):
         self._id = _id or uuid.uuid4().hex
 
     def json(self) -> Dict:
-        """JSON model for our application to mongo"""
+        """JSON model for alert class to mongo"""
         return {
             "_id": self._id,
             "price_limit": self.price_limit,

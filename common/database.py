@@ -25,7 +25,7 @@ class Database(object):
 
     @staticmethod
     def update(collection: str, query: Dict, data: Dict) -> None:
-        """Upsert mongo data"""
+        """Upsert mongo data - Update will happen if data already exists, insert happens if data does not exists"""
         Database.DATABASE[collection].update(query, data, upsert=True)
 
     @staticmethod

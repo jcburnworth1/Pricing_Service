@@ -1,7 +1,7 @@
 ## Import libraries
 from abc import ABCMeta, abstractmethod
 from common.database import Database
-from typing import List, TypeVar, Type, Dict
+from typing import List, TypeVar, Type, Dict, Union
 
 ## Custom Type for get_by_id() method because subclasses return different object types
 T = TypeVar('T', bound='Model') ## This will match return value to caller class
@@ -46,11 +46,11 @@ class Model(metaclass=ABCMeta):
         return [cls(**elem) for elem in elements_from_db]
 
     @classmethod
-    def find_one_by(cls: Type[T], attribute: str, value: str) -> Type[T]: ## Item.find_one_by('url', 'https://bla.com')
+    def find_one_by(cls: Type[T], attribute: str, value: Union[str, Dict]) -> T: ## Item.find_one_by('url', 'https://bla.com')
         """Find single record in mongo matching supplied attribute / value"""
         return cls(**Database.find_one(cls.collection, {attribute: value}))
 
     @classmethod
-    def find_many_by(cls: Type[T], attribute: str, value: str) -> List[T]:
+    def find_many_by(cls: Type[T], attribute: str, value: Union[str, Dict]) -> List[T]:
         """Find all records in mongo matching supplied attribute / value"""
         return [cls(**elem) for elem in Database.DATABASE.find(cls.collection, {attribute: value})]

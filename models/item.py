@@ -6,7 +6,7 @@ from models.model import Model
 
 ## Item Class - Instantiation of Model Class
 class Item(Model):
-    collection = 'items'
+    collection = 'items_deprecated'
 
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None): ## Type hinting
         super().__init__()
@@ -38,7 +38,7 @@ class Item(Model):
         return self.price
 
     def json(self) -> Dict:
-        """JSON model for our application to mongo"""
+        """JSON model for item class to mongo"""
         return {
             '_id': self._id,
             'url': self.url,
