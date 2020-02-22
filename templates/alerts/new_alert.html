@@ -8,13 +8,19 @@
         <form method="post"> <!--By default - Forms use get-->
 
             <div class="form-group">
-                <label for="item_url">Item ID</label>
-                <input type="text" class="form-control" id="item_url" name="item_url"/>
+                <label for="item_url">Item URL</label>
+                <input type="text" class="form-control" id="item_url" name="item_url"
+                       placeholder="https://www.johnlewis.com/john-lewis-partners-murray-ergonomic-office-chair-black/p1919328"
+                       aria-describedby="urlHelp"/>
+                <small class="form-text text-muted" id="urlHelp">
+                    What URL does the item reside on?
+                </small>
             </div>
 
             <div class="form-group">
                 <label for="price_limit">Price Limit</label>
-                <input type="text" class="form-control" id="price_limit" name="price_limit" placeholder="120" aria-describedby="priceLimitHelp"/>
+                <input type="text" class="form-control" id="price_limit" name="price_limit" placeholder="120"
+                       aria-describedby="priceLimitHelp"/>
                 <small class="form-text text-muted" id="priceLimitHelp">
                     Under which price for the item would you like to get notified?
                 </small>
