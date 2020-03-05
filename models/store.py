@@ -43,8 +43,7 @@ class Store(Model):
         :param url: The item's url
         :return: a Store
         """
-        pattern = re.compile(r"https?://.*?/")
+        pattern = re.compile(r"(https?://.*?/)")
         match = pattern.search(url)
         url_prefix = match.group(1)
         return cls.get_by_url_prefix(url_prefix)
-

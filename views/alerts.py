@@ -19,11 +19,12 @@ def index():
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
 def new_alert():
     """Capture inputs from new alert page and save to mongo"""
+    # https: // www.johnlewis.com / john - lewis - partners - murray - ergonomic - office - chair - black / p1919328
     if request.method == 'POST':
         item_url = request.form['item_url']
         price_limit = request.form['price_limit']
 
-        store = Store.find_one_by(item_url)
+        store = Store.find_by_url(item_url)
         item = Item(item_url, store.tag_name, store.query)
         item.save_to_mongo()
 
