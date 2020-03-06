@@ -1,6 +1,6 @@
 ## Import libraries
 from flask import Flask
-from views.items_deprecated import item_blueprint
+# from views.items_deprecated import item_blueprint
 from views.alerts import alert_blueprint
 
 ## Create the flask application
