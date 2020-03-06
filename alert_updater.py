@@ -2,10 +2,6 @@
 ## Import libraries
 from models.alert import Alert
 
-## Add an alert to mongo for testing purposes
-alert = Alert("25dee59f49f34cb4b70a96315e7a3890", 1700)
-alert.save_to_mongo()
-
 ## Check mongo and the website - Alert the user if price is under the threshold
 alerts = Alert.all()
 

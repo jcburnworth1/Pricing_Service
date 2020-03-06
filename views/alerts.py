@@ -22,7 +22,7 @@ def new_alert():
     #
     if request.method == 'POST':
         item_url = request.form['item_url']
-        price_limit = request.form['price_limit']
+        price_limit = float(request.form['price_limit'])
 
         store = Store.find_by_url(item_url)
         item = Item(item_url, store.tag_name, store.query)
