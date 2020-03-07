@@ -19,7 +19,7 @@ def index():
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
 def new_alert():
     """Capture inputs from new alert page and save to mongo"""
-    #
+
     if request.method == 'POST':
         alert_name = request.form['name']
         item_url = request.form['item_url']
