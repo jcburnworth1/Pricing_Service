@@ -3,23 +3,19 @@ import re, uuid, requests
 from bs4 import BeautifulSoup
 from typing import Dict
 from models.model import Model
+from dataclasses import dataclass, field
 
 ## Item Class - Instantiation of Model Class
+@dataclass(eq=False)
 class Item(Model):
-    collection = 'items_deprecated'
+    collection: str = field(init=False, default='items')
+    url: str
+    tag_name: str
+    query: Dict
+    _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
-    def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None): ## Type hinting
-        super().__init__()
-        self.url = url
-        self.tag_name = tag_name
-        self.query = query
+    def __post_init__(self): ## Type hinting
         self.price = None
-
-        self._id = _id or uuid.uuid4().hex ## Will overwrite the mongo db default id
-
-    def __repr__(self): ## Return an string representation of the item object
-        """Return a custom representation of Item"""
-        return f'<Item {self.url}>' ## f in front of quotes denotes an f string to add variable inside {}
 
     def load_price(self) -> float: ## Type hinting on what will be returned
         """Reach out to the specified URL and capture the price"""
