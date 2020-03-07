@@ -21,6 +21,7 @@ def new_alert():
     """Capture inputs from new alert page and save to mongo"""
     #
     if request.method == 'POST':
+        alert_name = request.form['name']
         item_url = request.form['item_url']
         price_limit = float(request.form['price_limit'])
 
@@ -28,6 +29,6 @@ def new_alert():
         item = Item(item_url, store.tag_name, store.query)
         item.save_to_mongo()
 
-        Alert(item._id, price_limit).save_to_mongo() ## Using protected here is fine since we are not changing item._id
+        Alert(alert_name, item._id, price_limit).save_to_mongo() ## Using protected here is fine since we are not changing item._id
 
     return render_template('alerts/new_alert.html')
