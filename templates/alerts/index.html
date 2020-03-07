@@ -9,9 +9,8 @@
         {% for alert in alerts %}
             <div class="list-group-item">
                 <h4>{{ alert.name }}</h4>
-                <h4>Alerts</h4>
                 <p>
-                    <a href="{{ alert.item.url }}">{{ alert.item_id }}</a>
+                    <a href="{{ alert.item.url }}">{{ alert.item_id }} (Last Price: ${{ alert.item.price }})</a>
                 </p>
             </div>
         {% endfor %}
