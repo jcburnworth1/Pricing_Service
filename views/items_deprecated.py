@@ -12,7 +12,7 @@ def index(): ## By default will show a list of all items_deprecated stored in mo
     """Return all items_deprecated from mongo when landing here"""
     items = Item.all()
 
-    return render_template('items_deprecated/index_deprecated.html', items=items)
+    return render_template('items_deprecated/item_index_deprecated.html', items=items)
 
 ## New Items Endpoint
 @item_blueprint.route('/new', methods=['GET', 'POST'])

@@ -1,5 +1,5 @@
 ## Import libraries
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.alert import Alert
 from models.store import Store
 from models.item import Item
@@ -13,7 +13,7 @@ def index():
     """Return all alerts from mongo when landing here"""
     alerts = Alert.all()
 
-    return render_template('alerts/index.html', alerts=alerts)
+    return render_template('alerts/alert_index.html', alerts=alerts)
 
 ## New Alerts Endpoint
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
@@ -33,3 +33,19 @@ def new_alert():
         Alert(alert_name, item._id, price_limit).save_to_mongo() ## Using protected here is fine since we are not changing item._id
 
     return render_template('alerts/new_alert.html')
+
+## Edit Alerts Endpoint
+@alert_blueprint.route('/edit/<string:alert_id>', methods=['GET', 'POST']) ## http://mysite/alerts/edit/<alert_id>
+def edit_alert(alert_id):
+    """Retrieve alert from mongo for modification"""
+    alert = Alert.get_by_id(alert_id)
+
+    if request.method == 'POST':
+        price_limit = float(request.form['price_limit'])
+
+        alert.price_limit = price_limit
+        alert.save_to_mongo()
+
+        return redirect(url_for('.index'))
+
+    return render_template('alerts/edit_alert.html', alert=alert)
