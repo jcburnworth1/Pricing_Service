@@ -1,6 +1,6 @@
 ## Import libraries
-from flask import Blueprint, render_template, request, redirect, url_for
 import json
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.store import Store
 
 ## Create item Blueprint
@@ -26,6 +26,8 @@ def create_store():
 
         Store(name, url_prefix, tag_name,query).save_to_mongo()
 
+        return redirect(url_for('.index'))
+
 
     return render_template('stores/new_store.html')
 
@@ -50,4 +52,4 @@ def edit_alert(store_id):
 
         return redirect(url_for('.index'))
 
-    return render_template('store/edit_store.html', store=store)
+    return render_template('stores/edit_store.html', store=store)
