@@ -32,7 +32,7 @@ def new_alert():
 
         Alert(alert_name, item._id, price_limit).save_to_mongo() ## Using protected here is fine since we are not changing item._id
 
-    return render_template('alerts/new_alert.html')
+    return render_template('alerts/alert_index.html')
 
 ## Edit Alerts Endpoint
 @alert_blueprint.route('/edit/<string:alert_id>', methods=['GET', 'POST']) ## http://mysite/alerts/edit/<alert_id>
