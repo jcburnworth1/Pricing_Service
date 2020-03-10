@@ -32,8 +32,8 @@ def create_store():
     return render_template('stores/new_store.html')
 
 ## Edit Stores Endpoint
-@store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST']) ## http://mysite/alerts/edit/<store_id>
-def edit_alert(store_id):
+@store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST']) ## http://mysite/stores/edit/<store_id>
+def edit_store(store_id):
     """Retrieve store from mongo for modification"""
     store = Store.get_by_id(store_id)
 
@@ -58,3 +58,5 @@ def edit_alert(store_id):
 @store_blueprint.route('/delete/<string:store_id>')
 def delete_store(store_id):
     Store.get_by_id(store_id).remove_from_mongo()
+
+    return redirect(url_for('.index'))
