@@ -32,7 +32,7 @@ class User(Model):
             raise UserErrors.UserAlreadyRegisteredError('The e-mail is already registered.')
 
         except UserErrors.UserNotFoundError:
-            User(email, password).save_to_mongo()
+            User(email, Utils.hash_password(password)).save_to_mongo()
 
             return True
 
