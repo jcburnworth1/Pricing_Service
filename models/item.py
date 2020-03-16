@@ -16,7 +16,10 @@ class Item(Model):
     _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
     def load_price(self) -> float: ## Type hinting on what will be returned
-        """Reach out to the specified URL and capture the price"""
+        """
+        This method reaches out to the website to get the current price
+        :return: Price of the object
+        """
         response = requests.get(self.url)
         content = response.content
         soup = BeautifulSoup(content, 'html.parser')
@@ -32,7 +35,10 @@ class Item(Model):
         return self.price
 
     def json(self) -> Dict:
-        """JSON model for item class to mongo"""
+        """
+        This method returns the JSON structure of an item object for insertion into database
+        :return: Dict version of the item parameters
+        """
         return {
             '_id': self._id,
             'url': self.url,

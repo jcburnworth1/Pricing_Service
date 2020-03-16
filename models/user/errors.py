@@ -6,13 +6,25 @@ class UserError(Exception):
         self.message = message
 
 class UserNotFoundError(UserError):
+    """
+    UserNotFoundError placeholder
+    """
     pass
 
 class UserAlreadyRegisteredError(UserError):
+    """
+    UserAlreadyRegisteredError placeholder
+    """
     pass
 
 class InvalidEmailError(UserError):
+    """
+    InvalidEmailError placeholder
+    """
     pass
 
 class IncorrectPasswordError(UserError):
+    """
+    IncorrectPasswordError placeholder
+    """
     pass

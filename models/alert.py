@@ -20,8 +20,28 @@ class Alert(Model):
         self.item = Item.get_by_id(self.item_id)
         self.user = User.find_by_email(self.user_email)
 
+    def load_item_price(self) -> float:
+        """
+        This method reaches out to the item's url and gets an updated price
+        :return: Price of the item
+        """
+        self.item.load_price()
+
+        return self.item.price
+
+    def notify_if_price_reached(self) -> None:
+        """
+        This method will notify the user if the specified price limit was reached
+        :return: Print notification that item is below specified price
+        """
+        if self.item.price < self.price_limit:
+            print(f'Item {self.item} has reached a price under {self.price_limit}. Latest Price: {self.item.price}')
+
     def json(self) -> Dict:
-        """JSON model for alert class to mongo"""
+        """
+        This method returns the JSON structure of an alert object for insertion into database
+        :return: Dict version of the alert parameters
+        """
         return {
             "_id": self._id,
             "name": self.name,
@@ -29,14 +49,3 @@ class Alert(Model):
             "price_limit": self.price_limit,
             "user_email": self.user_email
         }
-
-    def load_item_price(self) -> float:
-        """Reach out to specific url and get new price"""
-        self.item.load_price()
-
-        return self.item.price
-
-    def notify_if_price_reached(self) -> None:
-        """Determine if price is less than our limit and notify user"""
-        if self.item.price < self.price_limit:
-            print(f'Item {self.item} has reached a price under {self.price_limit}. Latest Price: {self.item.price}')

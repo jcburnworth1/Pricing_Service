@@ -11,7 +11,10 @@ store_blueprint = Blueprint('stores', __name__)
 @store_blueprint.route('/')
 @requires_login
 def index():
-    """Return all stores from mongo when landing here"""
+    """
+    This endpoint shows all available stores from the database
+    :return: Store index for the application
+    """
     stores = Store.all()
 
     return render_template('stores/store_index.html', stores=stores)
@@ -20,7 +23,10 @@ def index():
 @store_blueprint.route('/new', methods=['GET', 'POST'])
 @requires_login
 def create_store():
-
+    """
+    This endpoint allows a user to enter a new store and save to the database
+    :return: Store index for the application once store is successfully added
+    """
     if request.method == 'POST':
         name = request.form['name']
         url_prefix = request.form['url_prefix']
@@ -38,7 +44,10 @@ def create_store():
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST']) ## http://mysite/stores/edit/<store_id>
 @requires_login
 def edit_store(store_id):
-    """Retrieve store from mongo for modification"""
+    """
+    This endpoint allows a user to edit an existing store and save to the database
+    :return: Store index for the application once store is successfully edited
+    """
     store = Store.get_by_id(store_id)
 
     if request.method == 'POST':
@@ -62,6 +71,10 @@ def edit_store(store_id):
 @store_blueprint.route('/delete/<string:store_id>')
 @requires_login
 def delete_store(store_id):
+    """
+    This endpoint allows a user to delete an existing store and remove from the database
+    :return: Store index for the application once store is successfully removed
+    """
     Store.get_by_id(store_id).remove_from_mongo()
 
     return redirect(url_for('.index'))

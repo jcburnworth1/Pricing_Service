@@ -16,6 +16,11 @@ class User(Model):
 
     @classmethod
     def find_by_email(cls, email: str) -> "User":
+        """
+        This method searches the database for user's email and raises an exception if not found
+        :param email: The email input into the login page
+        :return: The record if the email was found
+        """
         try:
             return cls.find_one_by('email', email)
         except TypeError:
@@ -58,6 +63,10 @@ class User(Model):
             return True
 
     def json(self) -> Dict:
+        """
+        This method returns the JSON structure of a user object for insertion into database
+        :return: Dict version of the user parameters
+        """
         return {
             '_id': self._id,
             'email': self.email,

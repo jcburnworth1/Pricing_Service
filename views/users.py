@@ -8,6 +8,10 @@ user_blueprint = Blueprint('users', __name__)
 ## Register User Endpoint
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register_user():
+    """
+    This endpoint allows a user to register for the service
+    :return: User registration page
+    """
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -23,6 +27,10 @@ def register_user():
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login_user():
+    """
+    This endpoint allows a user to Login the service
+    :return: User login page
+    """
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -34,4 +42,4 @@ def login_user():
         except UserErrors.UserError as e:
             return e.message
 
-    return render_template('users/login.html')
+    return render_template('users/register.html')
