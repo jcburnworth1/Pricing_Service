@@ -11,13 +11,13 @@ alert_blueprint = Blueprint('alerts', __name__)
 @alert_blueprint.route('/')
 def index():
     """Return all alerts from mongo when landing here"""
-    alerts = Alert.all()
+    alerts = Alert.find_many_by('user_email', session['email'])
 
     return render_template('alerts/alert_index.html', alerts=alerts)
 
 ## New Alerts Endpoint
 @alert_blueprint.route('/new', methods=['GET', 'POST'])
-def new_alert():
+def new_alert(): ## Must be logged in to save an alert
     """Capture inputs from new alert page and save to mongo"""
 
     if request.method == 'POST':
@@ -30,7 +30,7 @@ def new_alert():
         item.load_price()
         item.save_to_mongo()
 
-        Alert(alert_name, item._id, price_limit).save_to_mongo() ## Using protected here is fine since we are not changing item._id
+        Alert(alert_name, item._id, price_limit, session['email']).save_to_mongo() ## Using protected here is fine since we are not changing item._id
 
         return redirect(url_for('.index'))
 
@@ -55,6 +55,9 @@ def edit_alert(alert_id):
 ## Delete Alerts Endpoint
 @alert_blueprint.route('/delete/<string:alert_id>')
 def delete_alert(alert_id):
-    Alert.get_by_id(alert_id).remove_from_mongo()
+    alert = Alert.get_by_id(alert_id).remove_from_mongo()
+
+    if alert.user_email == session['email']:
+        alert.remove_from_mongo()
 
     return redirect(url_for('.index'))

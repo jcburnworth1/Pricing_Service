@@ -4,12 +4,12 @@ from dataclasses import dataclass, field
 from typing import Dict
 from models.model import Model
 from common.utils import Utils
-import models.users.errors as UserErrors
+import models.user.errors as UserErrors
 
 ## User Class - Instantiation of Model class
 @dataclass
 class User(Model):
-    collection: str = field(init=False, default='users')
+    collection: str = field(init=False, default='user')
     email: str
     password: str
     _id: str = field(default_factory=lambda: uuid.uuid4().hex)

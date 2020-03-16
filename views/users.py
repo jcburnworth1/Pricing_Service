@@ -1,9 +1,9 @@
 ## Import libraries
 from flask import Blueprint, request, session, url_for, render_template, redirect
-from models.users.user import User, UserErrors
+from models.user.user import User, UserErrors
 
 ## Create item Blueprint
-user_blueprint = Blueprint('users', __name__)
+user_blueprint = Blueprint('user', __name__)
 
 ## Register User Endpoint
 @user_blueprint.route('/register', methods=['GET', 'POST'])
@@ -19,7 +19,7 @@ def register_user():
         except UserErrors.UserError as e:
             return e.message
 
-    return render_template('users/register.html')
+    return render_template('user/register.html')
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login_user():
@@ -34,4 +34,4 @@ def login_user():
         except UserErrors.UserError as e:
             return e.message
 
-    return render_template('users/login.html')
+    return render_template('user/login.html')

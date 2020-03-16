@@ -12,7 +12,7 @@ app.secret_key = 'jose' #os.urandom(64) - This needs to be random for secure key
 ## Register blueprints
 app.register_blueprint(alert_blueprint, url_prefix='/alerts')
 app.register_blueprint(store_blueprint, url_prefix='/stores')
-app.register_blueprint(user_blueprint, url_prefix='/users')
+app.register_blueprint(user_blueprint, url_prefix='/user')
 
 ## Execute the program
 if __name__ == '__main__':
