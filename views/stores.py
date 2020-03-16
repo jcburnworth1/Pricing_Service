@@ -2,12 +2,14 @@
 import json
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.store import Store
+from models.user import requires_login
 
 ## Create item Blueprint
 store_blueprint = Blueprint('stores', __name__)
 
 ## Store Endpoint
 @store_blueprint.route('/')
+@requires_login
 def index():
     """Return all stores from mongo when landing here"""
     stores = Store.all()
@@ -16,6 +18,7 @@ def index():
 
 ## New Store Endpoint
 @store_blueprint.route('/new', methods=['GET', 'POST'])
+@requires_login
 def create_store():
 
     if request.method == 'POST':
@@ -33,6 +36,7 @@ def create_store():
 
 ## Edit Stores Endpoint
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST']) ## http://mysite/stores/edit/<store_id>
+@requires_login
 def edit_store(store_id):
     """Retrieve store from mongo for modification"""
     store = Store.get_by_id(store_id)
@@ -56,6 +60,7 @@ def edit_store(store_id):
 
 ## Delete Stores Endpoint
 @store_blueprint.route('/delete/<string:store_id>')
+@requires_login
 def delete_store(store_id):
     Store.get_by_id(store_id).remove_from_mongo()
 
