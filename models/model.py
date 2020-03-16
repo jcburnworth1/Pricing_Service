@@ -51,7 +51,6 @@ class Model(metaclass=ABCMeta):
         return cls(**Database.find_one(cls.collection, {attribute: value}))
 
     @classmethod
-    def find_many_by(cls: Type[T], attribute: str, value: Union[str, Dict]) -> List[T]:
+    def find_many_by(cls: Type[T], attribute: str, value: str) -> List[T]:
         """Find all records in mongo matching supplied attribute / value"""
-        print("Find many by beginning")
-        return [cls(**elem) for elem in Database.DATABASE.find(cls.collection, {attribute: value})]
+        return [cls(**elem) for elem in Database.find(cls.collection, {attribute: value})]

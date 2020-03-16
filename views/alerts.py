@@ -11,10 +11,8 @@ alert_blueprint = Blueprint('alerts', __name__)
 @alert_blueprint.route('/')
 def index():
     """Return all alerts from mongo when landing here"""
-    print("Beginning find of alerts")
-    print(session['email'])
+    # alerts = Alert.all()
     alerts = Alert.find_many_by('user_email', session['email'])
-    print("Ending find alerts")
 
     return render_template('alerts/alert_index.html', alerts=alerts)
 
