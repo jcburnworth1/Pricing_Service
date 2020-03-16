@@ -11,7 +11,10 @@ alert_blueprint = Blueprint('alerts', __name__)
 @alert_blueprint.route('/')
 def index():
     """Return all alerts from mongo when landing here"""
+    print("Beginning find of alerts")
+    print(session['email'])
     alerts = Alert.find_many_by('user_email', session['email'])
+    print("Ending find alerts")
 
     return render_template('alerts/alert_index.html', alerts=alerts)
 
@@ -30,7 +33,8 @@ def new_alert(): ## Must be logged in to save an alert
         item.load_price()
         item.save_to_mongo()
 
-        Alert(alert_name, item._id, price_limit, session['email']).save_to_mongo() ## Using protected here is fine since we are not changing item._id
+        ## Using protected here is fine since we are not changing item._id
+        Alert(alert_name, item._id, price_limit, session['email']).save_to_mongo()
 
         return redirect(url_for('.index'))
 

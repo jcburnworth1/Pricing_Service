@@ -1,6 +1,5 @@
 ## Import libraries
 
-
 ## UserError Class - Base for extension into additional errors
 class UserError(Exception):
     def __init__(self, message):
