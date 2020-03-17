@@ -2,7 +2,7 @@
 import json
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.store import Store
-from models.user import requires_login
+from models.user import requires_admin, requires_login
 
 ## Create item Blueprint
 store_blueprint = Blueprint('stores', __name__)
@@ -21,7 +21,7 @@ def index():
 
 ## New Store Endpoint
 @store_blueprint.route('/new', methods=['GET', 'POST'])
-@requires_login
+@requires_admin
 def create_store():
     """
     This endpoint allows a user to enter a new store and save to the database
@@ -42,7 +42,7 @@ def create_store():
 
 ## Edit Stores Endpoint
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST']) ## http://mysite/stores/edit/<store_id>
-@requires_login
+@requires_admin
 def edit_store(store_id):
     """
     This endpoint allows a user to edit an existing store and save to the database
@@ -69,7 +69,7 @@ def edit_store(store_id):
 
 ## Delete Stores Endpoint
 @store_blueprint.route('/delete/<string:store_id>')
-@requires_login
+@requires_admin
 def delete_store(store_id):
     """
     This endpoint allows a user to delete an existing store and remove from the database
