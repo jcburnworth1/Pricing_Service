@@ -19,7 +19,7 @@ def register_user():
         try:
             User.register_user(email, password)
             session['email'] = email
-            return email
+            return redirect('../alerts')
         except UserErrors.UserError as e:
             return e.message
 
@@ -38,7 +38,7 @@ def login_user():
         try:
             if User.is_login_valid(email, password):
                 session['email'] = email
-                return email
+                return redirect('../alerts')
         except UserErrors.UserError as e:
             return e.message
 
@@ -47,4 +47,4 @@ def login_user():
 @user_blueprint.route('/logout')
 def logout():
     session['email'] = None
-    return f"You have successfully logged out!"
+    return redirect('../')
