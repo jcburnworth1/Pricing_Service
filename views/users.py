@@ -42,7 +42,7 @@ def login_user():
         except UserErrors.UserError as e:
             return e.message
 
-    return render_template('users/register.html')
+    return render_template('users/login.html')
 
 @user_blueprint.route('/logout')
 def logout():
