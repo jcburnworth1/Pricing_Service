@@ -1,6 +1,10 @@
-########## Alert Example ##########
+########## Alert Update Code ##########
 ## Import libraries
 from models.alert import Alert
+from dotenv import load_dotenv
+
+## load Environmental Variables
+load_dotenv()
 
 ## Check mongo and the website - Alert the user if price is under the threshold
 alerts = Alert.all()

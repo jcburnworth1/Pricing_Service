@@ -1,5 +1,5 @@
 ## Import libraries
-from flask import Blueprint, request, session, url_for, render_template, redirect
+from flask import Blueprint, request, session, render_template, redirect
 from models.user import User, UserErrors
 
 ## Create item Blueprint

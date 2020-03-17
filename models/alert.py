@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 from models.item import Item
 from models.model import Model
 from models.user import User
+from libs.mailgun import Mailgun
 
 ## Alert Class - Instantiation of Model class
 @dataclass(eq=False) # Remove all equality generation for now
@@ -35,7 +36,17 @@ class Alert(Model):
         :return: Print notification that item is below specified price
         """
         if self.item.price < self.price_limit:
-            print(f'Item {self.item} has reached a price under {self.price_limit}. Latest Price: {self.item.price}')
+            # print(
+            #     f"Item {self.item} has reached a price under {self.price_limit}. Latest price: {self.item.price}."
+            # )
+
+            Mailgun.send_email(
+                email=[self.user_email],
+                subject=f"Notification for {self.name}",
+                text=f"Your alert {self.name} has reached a price under {self.price_limit}. The latest price is {self.item.price}. Go to this address to check your item: {self.item.url}.",
+                html=f'<p>Your alert {self.name} has reached a price under {self.price_limit}.</p>'
+                     f'<p>The latest price is {self.item.price}. Check your item out <a href="{self.item.url}">here</a>.</p>',
+            )
 
     def json(self) -> Dict:
         """
