@@ -47,4 +47,4 @@ def login_user():
 @user_blueprint.route('/logout')
 def logout():
     session['email'] = None
-    return redirect('.user_login')
+    return f"You have successfully logged out!"
