@@ -6,8 +6,8 @@ from typing import Dict
 ## Database Class
 ## Will create connection to Mongo for interactions
 class Database(object):
-    # URI ='mongodb://127.0.0.1:27017/pricing'
-    URI = os.environ.get('MONGODB_URI', None)
+    URI ='mongodb://127.0.0.1:27017/pricing'
+    # URI = os.environ.get('MONGODB_URI', None)
     DATABASE = pymongo.MongoClient(URI).get_database()
 
     @staticmethod
