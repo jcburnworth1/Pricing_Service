@@ -6,9 +6,15 @@ from typing import Dict
 ## Database Class
 ## Will create connection to Mongo for interactions
 class Database(object):
-    URI ='mongodb://127.0.0.1:27017/pricing'
-    # URI = os.environ.get('MONGODB_URI', None)
+    # URI ='mongodb://127.0.0.1:27017/pricing' ## This works fine
+    URI = os.environ.get('MONGODB_URI', None) ## This causes an error
     DATABASE = pymongo.MongoClient(URI).get_database()
+
+    ## This works fine
+    # @staticmethod
+    # def initialize():
+    #     client = pymongo.MongoClient(Database.URI)
+    #     Database.DATABASE = client['pricing']
 
     @staticmethod
     def insert(collection: str, data: Dict) -> None:
