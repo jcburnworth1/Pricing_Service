@@ -15,7 +15,7 @@ app.config.update(
 
 ## This works fine
 # @app.before_first_request
-# def inti_db():
+# def init_db():
 #     Database.initialize()
 
 ## Register blueprints
