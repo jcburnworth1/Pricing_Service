@@ -49,7 +49,8 @@ class Model(metaclass=ABCMeta):
     def all(cls: Type[T]) -> List[T]:
         """
         This method loads all objects found in a given database collection
-        :return: List of all elements in a given database collection"""
+        :return: List of all elements in a given database collection
+        """
         elements_from_db = Database.find(cls.collection, {})
         ## cls.collection - Warning because collection is not defined in Model class
         ## This is ok because child classes will have cls.collection defined
